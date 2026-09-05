@@ -1,0 +1,34 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect iAquaLink account",
+        "description": "Enter the same credentials used in the iAquaLink mobile app.",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect to Zodiac cloud",
+      "invalid_auth": "Invalid email or password",
+      "no_supported_devices": "No supported Zodiac pool robots were found",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "This iAquaLink account is already configured"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "total_runtime": {"name": "Total runtime"},
+      "remaining_time": {"name": "Remaining time"},
+      "last_error": {"name": "Last error"},
+      "canister": {"name": "Canister"}
+    },
+    "binary_sensor": {
+      "connectivity": {"name": "Connection"}
+    }
+  }
+}

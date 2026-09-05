@@ -1,0 +1,34 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Подключение аккаунта iAquaLink",
+        "description": "Введите данные того же аккаунта, который используется в приложении iAquaLink.",
+        "data": {
+          "email": "Электронная почта",
+          "password": "Пароль"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Не удалось подключиться к облаку Zodiac",
+      "invalid_auth": "Неверная почта или пароль",
+      "no_supported_devices": "Поддерживаемые роботы Zodiac в аккаунте не найдены",
+      "unknown": "Неизвестная ошибка"
+    },
+    "abort": {
+      "already_configured": "Этот аккаунт iAquaLink уже настроен"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "total_runtime": {"name": "Общая наработка"},
+      "remaining_time": {"name": "Оставшееся время"},
+      "last_error": {"name": "Последняя ошибка"},
+      "canister": {"name": "Фильтр"}
+    },
+    "binary_sensor": {
+      "connectivity": {"name": "Подключение"}
+    }
+  }
+}
