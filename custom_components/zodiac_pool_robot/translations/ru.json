@@ -8,6 +8,13 @@
           "email": "Электронная почта",
           "password": "Пароль"
         }
+      },
+      "reauth_confirm": {
+        "title": "Повторная авторизация iAquaLink",
+        "description": "Для аккаунта iAquaLink {email} требуется новый пароль. Введите действующий пароль для повторного подключения роботов.",
+        "data": {
+          "password": "Новый пароль"
+        }
       }
     },
     "error": {
@@ -17,18 +24,29 @@
       "unknown": "Неизвестная ошибка"
     },
     "abort": {
-      "already_configured": "Этот аккаунт iAquaLink уже настроен"
+      "already_configured": "Этот аккаунт iAquaLink уже настроен",
+      "reauth_successful": "Повторная авторизация iAquaLink выполнена"
     }
   },
   "entity": {
     "sensor": {
-      "total_runtime": {"name": "Общая наработка"},
-      "remaining_time": {"name": "Оставшееся время"},
-      "last_error": {"name": "Последняя ошибка"},
-      "canister": {"name": "Фильтр"}
+      "total_runtime": {
+        "name": "Общая наработка"
+      },
+      "remaining_time": {
+        "name": "Оставшееся время"
+      },
+      "last_error": {
+        "name": "Последняя ошибка"
+      },
+      "canister": {
+        "name": "Фильтр"
+      }
     },
     "binary_sensor": {
-      "connectivity": {"name": "Подключение"}
+      "connectivity": {
+        "name": "Подключение"
+      }
     }
   }
 }

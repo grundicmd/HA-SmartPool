@@ -5,10 +5,11 @@ from __future__ import annotations
 import logging
 from typing import Any
 
+from homeassistant.config_entries import ConfigEntryAuthFailed
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
-from .api import ZodiacApiError, ZodiacClient
+from .api import ZodiacApiError, ZodiacAuthError, ZodiacClient
 from .const import DOMAIN, UPDATE_INTERVAL
 
 _LOGGER = logging.getLogger(__name__)
@@ -38,6 +39,8 @@ class ZodiacCoordinator(DataUpdateCoordinator[dict[str, dict[str, Any]]]):
             serial = str(device["serial_number"])
             try:
                 data[serial] = await self.client.async_get_status(device)
+            except ZodiacAuthError as err:
+                raise ConfigEntryAuthFailed from err
             except ZodiacApiError as err:
                 _LOGGER.warning("Unable to update Zodiac robot %s: %s", serial, err)
                 previous = (self.data or {}).get(serial, {})

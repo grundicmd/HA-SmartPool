@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from typing import Any
 
 import voluptuous as vol
@@ -73,3 +74,49 @@ class ZodiacPoolRobotConfigFlow(ConfigFlow, domain=DOMAIN):
             }
         )
         return self.async_show_form(step_id="user", data_schema=schema, errors=errors)
+
+    async def async_step_reauth(
+        self, entry_data: Mapping[str, Any]
+    ) -> ConfigFlowResult:
+        """Start reauthentication when iAquaLink credentials are rejected."""
+        return await self.async_step_reauth_confirm()
+
+    async def async_step_reauth_confirm(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Validate a new password and reload the existing config entry."""
+        reauth_entry = self._get_reauth_entry()
+        errors: dict[str, str] = {}
+
+        if user_input is not None:
+            client = ZodiacClient(
+                async_get_clientsession(self.hass),
+                reauth_entry.data[CONF_EMAIL],
+                user_input[CONF_PASSWORD],
+            )
+            try:
+                await client.async_login()
+            except ZodiacAuthError:
+                errors["base"] = "invalid_auth"
+            except ZodiacConnectionError:
+                errors["base"] = "cannot_connect"
+            except ZodiacApiError:
+                errors["base"] = "unknown"
+            else:
+                return self.async_update_reload_and_abort(
+                    reauth_entry,
+                    data_updates={CONF_PASSWORD: user_input[CONF_PASSWORD]},
+                )
+
+        return self.async_show_form(
+            step_id="reauth_confirm",
+            data_schema=vol.Schema(
+                {
+                    vol.Required(CONF_PASSWORD): TextSelector(
+                        TextSelectorConfig(type=TextSelectorType.PASSWORD)
+                    )
+                }
+            ),
+            errors=errors,
+            description_placeholders={"email": reauth_entry.data[CONF_EMAIL]},
+        )
