@@ -98,6 +98,8 @@ class ZodiacClient:
                     "GET", f"{ZODIAC_API_BASE}/devices/v2/{device_id}/shadow"
                 )
                 return self._normalize_cyclonext(device, shadow)
+            except ZodiacAuthError:
+                raise
             except ZodiacApiError:
                 payload = await self._async_ws_subscribe(device_id)
                 return self._normalize_cyclonext(device, payload)
@@ -158,6 +160,8 @@ class ZodiacClient:
                 legacy=legacy,
                 retry_auth=False,
             )
+        if status in (401, 403):
+            raise ZodiacAuthError("iAquaLink authentication was rejected")
         if status < 200 or status >= 300:
             raise ZodiacApiError(f"Zodiac API returned HTTP {status}")
         return data
