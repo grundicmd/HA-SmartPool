@@ -1,12 +1,14 @@
 {
   "domain": "zodiac_pool_robot",
   "name": "Zodiac Pool Robot",
-  "codeowners": ["@grundicmd"],
+  "codeowners": [
+    "@grundicmd"
+  ],
   "config_flow": true,
   "documentation": "https://github.com/grundicmd/HA-SmartPool",
   "integration_type": "hub",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/grundicmd/HA-SmartPool/issues",
   "requirements": [],
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
