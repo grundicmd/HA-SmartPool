@@ -8,6 +8,13 @@
           "email": "Email",
           "password": "Password"
         }
+      },
+      "reauth_confirm": {
+        "title": "Reauthenticate iAquaLink account",
+        "description": "The iAquaLink account {email} requires a new password. Enter the current password to reconnect your robots.",
+        "data": {
+          "password": "New password"
+        }
       }
     },
     "error": {
@@ -17,18 +24,29 @@
       "unknown": "Unexpected error"
     },
     "abort": {
-      "already_configured": "This iAquaLink account is already configured"
+      "already_configured": "This iAquaLink account is already configured",
+      "reauth_successful": "iAquaLink account successfully reauthenticated"
     }
   },
   "entity": {
     "sensor": {
-      "total_runtime": {"name": "Total runtime"},
-      "remaining_time": {"name": "Remaining time"},
-      "last_error": {"name": "Last error"},
-      "canister": {"name": "Canister"}
+      "total_runtime": {
+        "name": "Total runtime"
+      },
+      "remaining_time": {
+        "name": "Remaining time"
+      },
+      "last_error": {
+        "name": "Last error"
+      },
+      "canister": {
+        "name": "Canister"
+      }
     },
     "binary_sensor": {
-      "connectivity": {"name": "Connection"}
+      "connectivity": {
+        "name": "Connection"
+      }
     }
   }
 }
